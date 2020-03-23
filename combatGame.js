@@ -12,20 +12,14 @@
  * 
  * @param {string} name - Set the caracter name
  * @param {string} type - Set the caracter class
- * @param {array} [inventory=[]] - Set the list of inventory
+ * @param {array} [inventoryList=[]] - Set the list of inventory
  * @param {number} [life=100] - Set the start life level
  * @param {number} [isLiving=true] - Set the default status of life (living/dead)
  * 
  * @returns {object} Return a new object of character
  */
-function character(name, type, inventory = [], life = 100, isLiving = true) {
-  let char = {
-    charName : name,
-    charType : type,
-    charInventory : inventory,
-    charLife : life,
-    charliving : isLiving
-  };
+function character(name, type, inventoryList = [], life = 100, isLiving = true) {
+  let char = {};
   return char;
 }
 
@@ -37,11 +31,26 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
  * @param {string} name - The name of your item
  * @param {string} description - An beautiful description
  * @param {number} durability - Durability of the item, decrease when used
- * @param {boolean} [isConssumable=false] - This item is conssumable ?
+ * @param {boolean} [isConsumable=false] - This item is conssumable ?
  * @param {boolean} [isQuestItem=false] - This item is a quest item ?
+ * 
+ * @returns {object} Return a new object of item
  */
-function itemCreate(name, description, durability, isConssumable = false, isQuestItem = false) {
-  // Code ...
+function itemCreate(name, description, durability, isConsumable = false, isQuestItem = false) {
+  let item = {
+    itemName: name,
+    itemDescription: description,
+    itemDurability: durability,
+    itemIsConsumable: isConsumable,
+    itemQuestItem: isQuestItem,
+    // Methods
+    useItem: function() {
+      if (this.item > 0 && this.isConsumable === true) {
+        // TODO: Finish for after
+      }
+    }
+  };
+  return item;
 }
 
 /**

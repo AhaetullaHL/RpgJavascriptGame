@@ -12,14 +12,20 @@
  * 
  * @param {string} name - Set the caracter name
  * @param {string} type - Set the caracter class
- * @param {array} [inventoryList=[]] - Set the list of inventory
+ * @param {array} [inventory=[]] - Set the list of inventory
  * @param {number} [life=100] - Set the start life level
  * @param {number} [isLiving=true] - Set the default status of life (living/dead)
  * 
  * @returns {object} Return a new object of character
  */
-function character(name, type, inventoryList = [], life = 100, isLiving = true) {
-  let char = {};
+function character(name, type, inventory = [], life = 100, isLiving = true) {
+  let char = {
+    charName : name,
+    charType : type,
+    charInventory : inventory,
+    charLife : life,
+    charliving : isLiving
+  };
   return char;
 }
 

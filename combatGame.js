@@ -55,7 +55,24 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
 /**
  * @since 1.0.0
  * 
- * @function itemCreate() - Create a new item
+ * @function classFactory() - Create a new character class
+ * 
+ * @param {string} name - The class name of the caracter
+ * @param {strong} strength - The base attack strength of the class
+ * @param {array} abilities - The powers of the class
+ */
+function classFactory(name, strength, abilities) {
+  return {
+    className: name,
+    classStrenght: strength,
+    classAbilities: abilities
+  };
+}
+
+/**
+ * @since 1.0.0
+ * 
+ * @function itemsFactory() - Create a new item
  * 
  * @param {string} name - The name of your item
  * @param {string} description - An beautiful description
@@ -66,8 +83,8 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
  * 
  * @returns {object} Return a new object of item
  */
-function itemCreate(name, description, durability = 1, damages = 0, isConsumable = false, isQuestItem = false) {
-  let item = {
+function itemsFactory(name, description, durability = 1, damages = 0, isConsumable = false, isQuestItem = false) {
+  return {
     itemName: name,
     itemDescription: description,
     itemDurability: durability,
@@ -76,7 +93,8 @@ function itemCreate(name, description, durability = 1, damages = 0, isConsumable
     itemQuestItem: isQuestItem,
     // Methods
     useItem() {
-      if (this.itemDurability > 0 && this.isConsumable === true) {
+      if (this.itemDurability > 0) {
+        console.log(`The item ${this.itemName} was used !`);
         this.itemDurability--;
         if (this.itemDurability <= 0) {
           removeFromInventory(this);
@@ -84,16 +102,9 @@ function itemCreate(name, description, durability = 1, damages = 0, isConsumable
       }
     },
     showItem() {
-      console.info(
-        `#### Descriptif de l'objet ####
-        Name : ${this.itemName}
-        Description : ${this.itemDescription}
-        --------------------------------
-        Damages : ${this.itemDamages}
-        Durability : ${this.itemDurability}`);
+      console.info(`#### Descriptif de l'objet ####\n\rName : ${this.itemName}\n\rDescription : ${this.itemDescription}\n\r--------------------------------\n\rDamages : ${this.itemDamages}\n\rDurability : ${this.itemDurability}`);
     }
   };
-  return item;
 }
 
 /**

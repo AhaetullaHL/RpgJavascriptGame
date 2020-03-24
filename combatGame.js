@@ -37,23 +37,37 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
  * @param {string} name - The name of your item
  * @param {string} description - An beautiful description
  * @param {number} durability - Durability of the item, decrease when used
+ * @param {number} damages - Damage level of the item, to hit the enemy with more POWEEERRRR
  * @param {boolean} [isConsumable=false] - This item is conssumable ?
  * @param {boolean} [isQuestItem=false] - This item is a quest item ?
  * 
  * @returns {object} Return a new object of item
  */
-function itemCreate(name, description, durability, isConsumable = false, isQuestItem = false) {
+function itemCreate(name, description, durability = 1, damages = 0, isConsumable = false, isQuestItem = false) {
   let item = {
     itemName: name,
     itemDescription: description,
     itemDurability: durability,
+    itemDamages: damages,
     itemIsConsumable: isConsumable,
     itemQuestItem: isQuestItem,
     // Methods
-    useItem: function() {
-      if (this.item > 0 && this.isConsumable === true) {
-        // TODO: Finish for after
+    useItem() {
+      if (this.itemDurability > 0 && this.isConsumable === true) {
+        this.itemDurability--;
+        if (this.itemDurability <= 0) {
+          removeFromInventory(this);
+        }
       }
+    },
+    showItem() {
+      console.info(
+        `#### Descriptif de l'objet ####
+        Name : ${this.itemName}
+        Description : ${this.itemDescription}
+        --------------------------------
+        Damages : ${this.itemDamages}
+        Durability : ${this.itemDurability}`);
     }
   };
   return item;
@@ -69,5 +83,14 @@ function itemCreate(name, description, durability, isConsumable = false, isQuest
  * @callback Console.log() Write in the console
  */
 function startGame(firstChar, secondChar) {
- // Code ...
+  while(firstChar.charLiving && secondChar.charLiving) {
+    firstChar.attack(secondChar);
+    secondChar.attack(firstChar);
+    console.log(`Vie de ${firstChar.charName} :${firstChar.charLife} \n Vie de ${secondChar.charName} : ${secondChar.charLife}`);
+  }
+  if(firstChar.charLife === 0) {
+    console.log(`${firstChar.charName} est mort, félicitation à ${secondChar.charName}`);
+  } else {
+    console.log(`${secondChar.charName} est mort, félicitation à ${firstChar.charName}`);
+  }
 }

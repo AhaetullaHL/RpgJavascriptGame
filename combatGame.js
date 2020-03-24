@@ -120,7 +120,7 @@ function startGame(firstChar, secondChar) {
   while(firstChar.charLiving && secondChar.charLiving) {
     firstChar.attack(secondChar);
     secondChar.attack(firstChar);
-    console.log(`Vie de ${firstChar.charName} :${firstChar.charLife} \n Vie de ${secondChar.charName} : ${secondChar.charLife}`);
+    console.log(`Vie de ${firstChar.charName} : ${firstChar.charLife} \n Vie de ${secondChar.charName} : ${secondChar.charLife}`);
   }
   if(firstChar.charLife === 0) {
     console.log(`${firstChar.charName} est mort, félicitation à ${secondChar.charName}`);

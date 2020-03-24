@@ -26,6 +26,7 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
     charLife : life,
     charliving : isLiving
   };
+  return char;
 }
 
 /**

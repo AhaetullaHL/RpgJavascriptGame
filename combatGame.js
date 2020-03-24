@@ -24,7 +24,10 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
     charType : type,
     charInventory : inventory,
     charLife : life,
-    charLiving : isLiving,
+
+    isAlive() {
+      return this.charLife > 0;
+    },
     /**
      * Move the character
      * 
@@ -44,7 +47,8 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
      * - 
      */
     attack(target){
-      target.life -= 1
+      console.log("For Frodo!")
+      target.life -= 1;
     }
   };
 

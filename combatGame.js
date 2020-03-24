@@ -24,8 +24,31 @@ function character(name, type, inventory = [], life = 100, isLiving = true) {
     charType : type,
     charInventory : inventory,
     charLife : life,
-    charliving : isLiving
+    charLiving : isLiving,
+    /**
+     * Move the character
+     * 
+     * TODO:
+     * - advance / step back
+     * - right / left
+     * - turn
+     * - 
+     */
+    move(){
+
+    },
+    /**
+     * Attack of Character
+     * 
+     * TODO:
+     * - 
+     */
+    attack(target){
+      target.life -= 1
+    }
   };
+
+
   return char;
 }
 

@@ -47,6 +47,13 @@ button:hover {
     margin: 5vh 0;
 }
 
+input.console-input {
+    background-color: #223;
+    border: 0;
+    color: #eee;
+    font: 600 12px "Roboto Mono", Arial, sans-serif;
+}
+
 .interface {
     align-items: center;
     background-color: #fff;

@@ -12,39 +12,49 @@
  * 
  * @param {string} name - Set the caracter name
  * @param {string} type - Set the caracter class
+ * @param {number} dmg - Set the character damage
  * @param {array} [inventory=[]] - Set the list of inventory
  * @param {number} [life=100] - Set the start life level
  * @param {number} [isLiving=true] - Set the default status of life (living/dead)
  * 
  * @returns {object} Return a new object of character
  */
-function character(name, type, inventory = [], life = 100, isLiving = true) {
+function character(name, type, dmg, inventory = [], life = 100) {
   let char = {
     charName : name,
     charType : type,
     charInventory : inventory,
     charLife : life,
-    charLiving : isLiving,
-    /**
-     * Move the character
-     * 
-     * TODO:
-     * - advance / step back
-     * - right / left
-     * - turn
-     * - 
-     */
-    move(){
+    charDmg : dmg,
 
+    isAlive(){
+      return this.life > 0;
     },
-    /**
-     * Attack of Character
-     * 
-     * TODO:
-     * - 
-     */
+
+    canAttack(){
+      return this.isAlive();
+    },
+
     attack(target){
-      target.life -= 1
+      console.log("For Frodo!")
+      target.receiveDamage(this.charDmg);
+    },
+
+    reveiveDamage(dmg){
+      if (this.random() > 90) this.dodge();
+      this.charLife -= dmg;
+      if(dmg > 25) console.warn("Critical Hit!");
+    },
+
+    random(){
+      let min = 0;
+      let max = 100;
+      return Math.floor(Math.random() * (max - min)) + min;
+    },
+
+    dodge(){
+      dmg = 0;
+      console.log("Dodge!")
     }
   };
 

@@ -28,7 +28,7 @@ function character(name, type, dmg, inventory = [], life = 100) {
     charDmg : dmg,
 
     isAlive(){
-      return this.life > 0;
+      return this.charLife > 0;
     },
 
     canAttack(){
@@ -36,11 +36,13 @@ function character(name, type, dmg, inventory = [], life = 100) {
     },
 
     attack(target){
-      console.log("For Frodo!")
-      target.receiveDamage(this.charDmg);
+      if (this.canAttack()) {
+        console.log("For Frodo!");
+        target.receiveDamage(this.charDmg);
+      }
     },
 
-    reveiveDamage(dmg){
+    receiveDamage(dmg){
       if (this.random() > 90) this.dodge();
       this.charLife -= dmg;
       if(dmg > 25) console.warn("Critical Hit!");
@@ -54,7 +56,7 @@ function character(name, type, dmg, inventory = [], life = 100) {
 
     dodge(){
       dmg = 0;
-      console.log("Dodge!")
+      console.log("Dodge!");
     }
   };
 
@@ -127,14 +129,14 @@ function itemsFactory(name, description, durability = 1, damages = 0, isConsumab
  * @callback Console.log() Write in the console
  */
 function startGame(firstChar, secondChar) {
-  while(firstChar.charLiving && secondChar.charLiving) {
+  while(firstChar.isAlive() && secondChar.isAlive()) {
     firstChar.attack(secondChar);
     secondChar.attack(firstChar);
     console.log(`Vie de ${firstChar.charName} : ${firstChar.charLife} \n Vie de ${secondChar.charName} : ${secondChar.charLife}`);
   }
-  if(firstChar.charLife === 0) {
-    console.log(`${firstChar.charName} est mort, félicitation à ${secondChar.charName}`);
-  } else {
+  if (firstChar.isAlive()) {
     console.log(`${secondChar.charName} est mort, félicitation à ${firstChar.charName}`);
+  } else {
+    console.log(`${firstChar.charName} est mort, félicitation à ${secondChar.charName}`);
   }
 }
